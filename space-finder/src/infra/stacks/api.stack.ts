@@ -8,7 +8,7 @@ interface ApiStackProps extends StackProps {
 
 export class ApiStack extends Stack {
   constructor(scope: Construct, id: string, props?: ApiStackProps) {
-    super(scope, id);
+    super(scope, id, props);
 
     const api = new RestApi(this, "SpaceFinderApi");
     const spaceResource = api.root.addResource("spaces");
