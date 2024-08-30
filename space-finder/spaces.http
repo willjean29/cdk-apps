@@ -1,2 +1,5 @@
-GET https://jk3nnv1dbc.execute-api.us-east-1.amazonaws.com/prod/spaces
+GET https://23c9lw9f0g.execute-api.us-east-1.amazonaws.com/prod/spaces
+###
+
+POST https://23c9lw9f0g.execute-api.us-east-1.amazonaws.com/prod/spaces
 ###

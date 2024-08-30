@@ -3,15 +3,16 @@ import { LambdaIntegration, RestApi } from "aws-cdk-lib/aws-apigateway";
 import { Construct } from "constructs";
 
 interface ApiStackProps extends StackProps {
-  helloLambdaIntegration: LambdaIntegration;
+  spacesLambdaIntegration: LambdaIntegration;
 }
 
 export class ApiStack extends Stack {
-  constructor(scope: Construct, id: string, props?: ApiStackProps) {
+  constructor(scope: Construct, id: string, props: ApiStackProps) {
     super(scope, id, props);
 
     const api = new RestApi(this, "SpaceFinderApi");
     const spaceResource = api.root.addResource("spaces");
-    spaceResource.addMethod("GET", props?.helloLambdaIntegration);
+    spaceResource.addMethod("GET", props.spacesLambdaIntegration);
+    spaceResource.addMethod("POST", props.spacesLambdaIntegration);
   }
 }
