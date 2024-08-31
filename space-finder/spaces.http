@@ -2,4 +2,9 @@ GET https://23c9lw9f0g.execute-api.us-east-1.amazonaws.com/prod/spaces
 ###
 
 POST https://23c9lw9f0g.execute-api.us-east-1.amazonaws.com/prod/spaces
+content-Type: application/json
+
+{
+  "location": "New York"
+}
 ###
