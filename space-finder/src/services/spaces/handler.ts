@@ -22,13 +22,6 @@ async function handler(event: APIGatewayProxyEvent, context: Context): Promise<A
     console.log({ error });
     return { statusCode: 500, body: JSON.stringify({ message: error.message }) };
   }
-
-  const response = {
-    statusCode: 200,
-    body: JSON.stringify({ message }),
-  };
-  console.log({ event });
-  return response;
 }
 
 export { handler };
