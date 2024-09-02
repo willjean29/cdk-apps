@@ -1,6 +1,8 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult, Context } from "aws-lambda";
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
-import { postSpace } from "./post";
+import { postSpace } from "./post-spaces";
+import { getSpaces } from "./get-spaces";
+
 const dbClient = new DynamoDBClient({});
 
 async function handler(event: APIGatewayProxyEvent, context: Context): Promise<APIGatewayProxyResult> {
@@ -8,12 +10,11 @@ async function handler(event: APIGatewayProxyEvent, context: Context): Promise<A
   try {
     switch (event.httpMethod) {
       case "GET":
-        message = "GET method";
-        break;
+        const getResponse = await getSpaces(event, dbClient);
+        return getResponse;
       case "POST":
-        const response = await postSpace(event, dbClient);
-        return response;
-        break;
+        const postResponse = await postSpace(event, dbClient);
+        return postResponse;
       default:
         return { statusCode: 405, body: "Method Not Allowed" };
     }
