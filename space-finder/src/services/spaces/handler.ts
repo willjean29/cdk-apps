@@ -4,6 +4,7 @@ import { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
 import { postSpace } from "./post-spaces";
 import { getSpaces } from "./get-spaces";
 import { updateSpace } from "./update-spaces";
+import { deleteSpaces } from "./delete-spaces";
 
 const dbClient = new DynamoDBClient({});
 const dbDocumentClient = DynamoDBDocumentClient.from(dbClient);
@@ -20,6 +21,9 @@ async function handler(event: APIGatewayProxyEvent, context: Context): Promise<A
       case "PUT":
         const putResponse = await updateSpace(event, dbDocumentClient);
         return putResponse;
+      case "DELETE":
+        const deleteResponse = await deleteSpaces(event, dbDocumentClient);
+        return deleteResponse;
       default:
         return { statusCode: 405, body: "Method Not Allowed" };
     }
