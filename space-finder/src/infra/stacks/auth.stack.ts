@@ -5,8 +5,8 @@ import { CfnUserPool, UserPool, UserPoolClient } from "aws-cdk-lib/aws-cognito";
 import { CfnOutput, RemovalPolicy } from "aws-cdk-lib/core";
 
 export class AuthStack extends Stack {
-  private userPool: UserPool;
-  private userPoolClient: UserPoolClient;
+  public userPool: UserPool;
+  public userPoolClient: UserPoolClient;
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
     this.createUserPool();

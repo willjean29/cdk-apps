@@ -7,5 +7,5 @@ import { AuthStack } from "./stacks/auth.stack";
 const app = new App();
 const dataStack = new DataStack(app, "DataStack");
 const lambdaStack = new LambdaStack(app, "LambdaStack", { spacesTable: dataStack.spacesTable });
-new AuthStack(app, "AuthStack");
-new ApiStack(app, "ApiStack", { spacesLambdaIntegration: lambdaStack.spacesLambdaIntegration });
+const authStack = new AuthStack(app, "AuthStack");
+new ApiStack(app, "ApiStack", { spacesLambdaIntegration: lambdaStack.spacesLambdaIntegration, cognitoUserPool: authStack.userPool });

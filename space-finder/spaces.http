@@ -1,10 +1,33 @@
-GET https://23c9lw9f0g.execute-api.us-east-1.amazonaws.com/prod/spaces
+@url = https://23c9lw9f0g.execute-api.us-east-1.amazonaws.com/prod
+@token = eyJraWQiOiJLVXhtRGNnREJSUERWaXRCUU1YTlZvZ0pHYm9yT3UzYU92VVZXSmw3SnVRPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiJiNDk4NzQ4OC03MDAxLTcwNTQtMTQyMi1iNzIwMDFkNmM5ZjUiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiaXNzIjoiaHR0cHM6XC9cL2NvZ25pdG8taWRwLnVzLWVhc3QtMS5hbWF6b25hd3MuY29tXC91cy1lYXN0LTFfTXdydFNEYVFwIiwiY29nbml0bzp1c2VybmFtZSI6ImplYW4iLCJvcmlnaW5fanRpIjoiMWM1NzNjYTItZGU1OC00NDA3LTg4YTktMWE1MWNiNGZkZmExIiwiYXVkIjoiMTRic3QxcDZpaWRxbmUwZTBmb3JpZzMxdHUiLCJldmVudF9pZCI6ImQ3ZDMwM2I3LTJkZjEtNDJiMS05ZmE5LWRhN2QzOTdjMjg4ZCIsInRva2VuX3VzZSI6ImlkIiwiYXV0aF90aW1lIjoxNzI1NTAzMjY0LCJleHAiOjE3MjU1MDY4NjQsImlhdCI6MTcyNTUwMzI2NCwianRpIjoiNzk4ZDIxZmUtNzY1YS00ZjdmLWIwOTEtMzI4OTE5OWRmZDY1IiwiZW1haWwiOiJqZWFuQGdtYWlsLmNvbSJ9.YgAsN4hV7RmDejtEEsaqEKCRQ17CEgbvuM6IDTbhW90d-CUIZ8JyQzJqictDLXWGOiVGPlsd-QGGP1gSSeIEVxBcxbPsFaRzR7nBKraPKBPDp98CEjUSO7LrqMrojA8F_BUPVdCwy1rdYuui5-sEalPQXNrTc1FiRxikmXZ4pvi6piSRDGrAcRVm1B63MKlj5cKLu0ZDA74L-aqRFRrraXVVwnqZqgiel7zZEsseG5FCMAI_72G693GVxmEujmjeFciaPK91v6q9Xwr0wXPNxd-ZDNzN_MUMkfJEe__r8Mqjw_rQbetIZaWXe85yFZB_H2t2PYXQa4gAAz65F9Oh1g
+
+GET {{url}}/spaces
+Authorization: {{token}}
 ###
 
-POST https://23c9lw9f0g.execute-api.us-east-1.amazonaws.com/prod/spaces
+GET {{url}}/spaces?id=4976ae4b-9953-44cd-85aa-d3c0b2f0484e
+Authorization: {{token}}
+###
+
+POST {{url}}/spaces
+Authorization: {{token}}
 content-Type: application/json
 
 {
-  "location": "New York"
+  "location": "Santiago",
+  "name": "Destino"
 }
+###
+
+PUT {{url}}/spaces?id=4976ae4b-9953-44cd-85aa-d3c0b2f048
+Authorization: {{token}}
+content-Type: application/json
+
+{
+  "location": "Cartagena"
+}
+###
+
+DELETE {{url}}/spaces?id=4976ae4b-9953-44cd-85aa-d3c0b2f048
+Authorization: {{token}}
 ###
