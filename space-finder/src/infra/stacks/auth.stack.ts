@@ -1,7 +1,7 @@
 import { Stack, StackProps } from "aws-cdk-lib";
 import { LambdaIntegration, RestApi } from "aws-cdk-lib/aws-apigateway";
 import { Construct } from "constructs";
-import { CfnUserPool, UserPool, UserPoolClient } from "aws-cdk-lib/aws-cognito";
+import { CfnUserPool, CfnUserPoolGroup, UserPool, UserPoolClient } from "aws-cdk-lib/aws-cognito";
 import { CfnOutput, RemovalPolicy } from "aws-cdk-lib/core";
 
 export class AuthStack extends Stack {
@@ -11,6 +11,7 @@ export class AuthStack extends Stack {
     super(scope, id, props);
     this.createUserPool();
     this.createUserPoolClient();
+    this.createAdminGroup();
   }
 
   private createUserPool() {
@@ -34,6 +35,13 @@ export class AuthStack extends Stack {
     });
     new CfnOutput(this, "SpaceUserPoolClientId", {
       value: this.userPoolClient.userPoolClientId,
+    });
+  }
+
+  private createAdminGroup() {
+    new CfnUserPoolGroup(this, "SpaceAdmins", {
+      userPoolId: this.userPool.userPoolId,
+      groupName: "admins",
     });
   }
 }

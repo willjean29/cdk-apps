@@ -1,7 +1,15 @@
 import { DeleteCommand, DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
+import { hasAdminGroup } from "../shared/utils";
 
 export async function deleteSpaces(event: APIGatewayProxyEvent, dbClient: DynamoDBDocumentClient): Promise<APIGatewayProxyResult> {
+  console.log({ event });
+  if (!hasAdminGroup(event)) {
+    return {
+      statusCode: 403,
+      body: JSON.stringify({ message: "Forbidden to delete spaces" }),
+    };
+  }
   const params = event.queryStringParameters;
 
   if (params && params.id) {
