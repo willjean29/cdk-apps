@@ -115,7 +115,7 @@ export class AuthStack extends Stack {
     this.adminRole.addToPolicy(
       new PolicyStatement({
         effect: Effect.ALLOW,
-        actions: ["s3:ListBucket"],
+        actions: ["s3:ListAllMyBuckets"],
         resources: ["*"],
       })
     );
