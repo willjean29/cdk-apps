@@ -6,26 +6,31 @@ import { getSpaces } from "./get-spaces";
 import { updateSpace } from "./update-spaces";
 import { deleteSpaces } from "./delete-spaces";
 import { MissingFieldError } from "../shared/validators";
-import { JSONParseError } from "../shared/utils";
+import { addCorsHeader, JSONParseError } from "../shared/utils";
 
 const dbClient = new DynamoDBClient({});
 const dbDocumentClient = DynamoDBDocumentClient.from(dbClient);
 
 async function handler(event: APIGatewayProxyEvent, context: Context): Promise<APIGatewayProxyResult> {
+  let response: APIGatewayProxyResult;
   try {
     switch (event.httpMethod) {
       case "GET":
         const getResponse = await getSpaces(event, dbDocumentClient);
-        return getResponse;
+        response = getResponse;
+        break;
       case "POST":
         const postResponse = await postSpace(event, dbDocumentClient);
-        return postResponse;
+        response = postResponse;
+        break;
       case "PUT":
         const putResponse = await updateSpace(event, dbDocumentClient);
-        return putResponse;
+        response = putResponse;
+        break;
       case "DELETE":
         const deleteResponse = await deleteSpaces(event, dbDocumentClient);
-        return deleteResponse;
+        response = deleteResponse;
+        break;
       default:
         return { statusCode: 405, body: "Method Not Allowed" };
     }
@@ -36,6 +41,9 @@ async function handler(event: APIGatewayProxyEvent, context: Context): Promise<A
     }
     return { statusCode: 500, body: JSON.stringify({ message: error.message }) };
   }
+
+  addCorsHeader(response);
+  return response;
 }
 
 export { handler };
