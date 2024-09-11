@@ -17,6 +17,7 @@ export default function LoginComponent({ authService, setUserNameCb }: LoginProp
     event.preventDefault();
     if (userName && password) {
       const loginResponse = await authService.login(userName, password);
+      console.log({ loginResponse });
       const userName2 = authService.getUserName();
       if (userName2) {
         setUserNameCb(userName2);
