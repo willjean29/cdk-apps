@@ -1,14 +1,15 @@
 import { useState } from "react";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
+import "./App.css";
 import LoginComponent from "./components/LoginComponent";
 import NavBar from "./components/Navbar";
-import { AuthService } from "./services/auth.service";
-import "./App.css";
 import CreateSpace from "./components/spaces/CreateSpace";
+import { AuthService } from "./services/auth.service";
 import { DataService } from "./services/data.service";
 
 const authService = new AuthService();
-const dataService = new DataService();
+const dataService = new DataService(authService);
+
 function App() {
   const [userName, setUserName] = useState<string | undefined>(undefined);
 
