@@ -2,7 +2,7 @@ import { CfnOutput, Stack, StackProps } from "aws-cdk-lib";
 import { AttributeType, ITable, Table } from "aws-cdk-lib/aws-dynamodb";
 import { Construct } from "constructs";
 import { getSuffixFromStack } from "../utils";
-import { Bucket, HttpMethods, IBucket } from "aws-cdk-lib/aws-s3";
+import { Bucket, HttpMethods, IBucket, ObjectOwnership } from "aws-cdk-lib/aws-s3";
 export class DataStack extends Stack {
   public readonly spacesTable: ITable;
   public readonly photosBucket: IBucket;
@@ -23,6 +23,7 @@ export class DataStack extends Stack {
           allowedHeaders: ["*"],
         },
       ],
+      objectOwnership: ObjectOwnership.OBJECT_WRITER,
       blockPublicAccess: {
         blockPublicAcls: false,
         blockPublicPolicy: false,
