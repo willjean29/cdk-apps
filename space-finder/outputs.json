@@ -5,6 +5,9 @@
     "SpaceFinderPhotosBucketName": "space-finder-photos-0affd6c73fc9",
     "ExportsOutputRefSpaceTableA2492A9A3B0BE7FE": "SpaceTable-0affd6c73fc9"
   },
+  "UIDeploymentStack": {
+    "SpaceFinderUrl": "d2ckvey7e6mgmp.cloudfront.net"
+  },
   "LambdaStack": {
     "ExportsOutputFnGetAttSpacesHandlerDAE51465Arn4679F7F1": "arn:aws:lambda:us-east-1:851725476545:function:LambdaStack-SpacesHandlerDAE51465-57g2qvrfSCqD"
   },

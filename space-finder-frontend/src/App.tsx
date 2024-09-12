@@ -6,6 +6,7 @@ import NavBar from "./components/Navbar";
 import CreateSpace from "./components/spaces/CreateSpace";
 import { AuthService } from "./services/auth.service";
 import { DataService } from "./services/data.service";
+import Spaces from "./components/spaces/Spaces";
 
 const authService = new AuthService();
 const dataService = new DataService(authService);
@@ -40,7 +41,7 @@ function App() {
         },
         {
           path: "/spaces",
-          element: <div>Spaces page </div>,
+          element: <Spaces dataService={dataService} />,
         },
       ],
     },
