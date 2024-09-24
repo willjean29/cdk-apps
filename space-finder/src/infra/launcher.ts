@@ -4,6 +4,7 @@ import { LambdaStack } from "./stacks/lambda.stack";
 import { ApiStack } from "./stacks/api.stack";
 import { AuthStack } from "./stacks/auth.stack";
 import { UIDeploymentStack } from "./stacks/ui-deployment.stack";
+import { MonitorStack } from "./stacks/monitor.stack";
 
 const app = new App();
 const dataStack = new DataStack(app, "DataStack");
@@ -13,3 +14,4 @@ const authStack = new AuthStack(app, "AuthStack", {
 });
 new ApiStack(app, "ApiStack", { spacesLambdaIntegration: lambdaStack.spacesLambdaIntegration, cognitoUserPool: authStack.userPool });
 new UIDeploymentStack(app, "UIDeploymentStack");
+new MonitorStack(app, "MonitorStack");
