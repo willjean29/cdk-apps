@@ -1,6 +1,6 @@
 import { App } from "aws-cdk-lib";
 import { MonitorStack } from "../../src/infra/stacks/monitor.stack";
-import { Match, Template } from "aws-cdk-lib/assertions";
+import { Capture, Match, Template } from "aws-cdk-lib/assertions";
 
 describe("Initial test suite ", () => {
   let monitorStackTemplate: Template;
@@ -54,5 +54,31 @@ describe("Initial test suite ", () => {
         "Fn::GetAtt": [lambdaName, "Arn"],
       },
     });
+  });
+
+  it("Alarm actions", () => {
+    const alarmActionsCapture = new Capture();
+    monitorStackTemplate.hasResourceProperties("AWS::CloudWatch::Alarm", {
+      AlarmActions: alarmActionsCapture,
+    });
+
+    expect(alarmActionsCapture.asArray()).toEqual([
+      {
+        Ref: expect.stringMatching(/^AlarmTopic/),
+      },
+    ]);
+  });
+
+  it("Monitor stack snapshot", () => {
+    expect(monitorStackTemplate.toJSON()).toMatchSnapshot();
+  });
+
+  it("Lambda stack snapshot", () => {
+    const lambda = monitorStackTemplate.findResources("AWS::Lambda::Function");
+    expect(lambda).toMatchSnapshot();
+  });
+  it("SnsTopic stack snapshot", () => {
+    const snsTopic = monitorStackTemplate.findResources("AWS::SNS::Topic");
+    expect(snsTopic).toMatchSnapshot();
   });
 });
