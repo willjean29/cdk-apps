@@ -8,7 +8,8 @@ import { deleteSpaces } from "./delete-spaces";
 import { MissingFieldError } from "../shared/validators";
 import { addCorsHeader, JSONParseError } from "../shared/utils";
 
-const dbClient = new DynamoDBClient({});
+import { captureAWSClient } from "aws-xray-sdk-core/dist/lib/patchers/aws3_p";
+const dbClient = captureAWSClient(new DynamoDBClient({}));
 const dbDocumentClient = DynamoDBDocumentClient.from(dbClient);
 
 async function handler(event: APIGatewayProxyEvent, context: Context): Promise<APIGatewayProxyResult> {

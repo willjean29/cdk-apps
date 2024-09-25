@@ -7,9 +7,9 @@ async function testAuth() {
   console.log({ signInOutput });
   const idToken = await authService.getIdToken();
   console.log({ idToken });
-  const credentials = await authService.generateTemporayCredentials();
-  console.log({ credentials });
-  listBuckets(credentials);
+  // const credentials = await authService.generateTemporayCredentials();
+  // console.log({ credentials });
+  // listBuckets(credentials);
 }
 
 async function listBuckets(credentials: any) {
