@@ -1,14 +1,14 @@
-import { APIGatewayProxyEvent, APIGatewayProxyResult, Context } from "aws-lambda";
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
-import { postSpace } from "./post-spaces";
-import { getSpaces } from "./get-spaces";
-import { updateSpace } from "./update-spaces";
-import { deleteSpaces } from "./delete-spaces";
-import { MissingFieldError } from "../shared/validators";
+import { APIGatewayProxyEvent, APIGatewayProxyResult, Context } from "aws-lambda";
+import { captureAWSClient } from "aws-xray-sdk-core";
 import { addCorsHeader, JSONParseError } from "../shared/utils";
+import { MissingFieldError } from "../shared/validators";
+import { deleteSpaces } from "./delete-spaces";
+import { getSpaces } from "./get-spaces";
+import { postSpace } from "./post-spaces";
+import { updateSpace } from "./update-spaces";
 
-import { captureAWSClient } from "aws-xray-sdk-core/dist/lib/patchers/aws3_p";
 const dbClient = captureAWSClient(new DynamoDBClient({}));
 const dbDocumentClient = DynamoDBDocumentClient.from(dbClient);
 
