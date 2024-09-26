@@ -1,5 +1,5 @@
 import { SNSEvent } from "aws-lambda";
-import { handler } from "../../src/services/monitor/handler";
+import { handler } from "../../../src/services/monitor/handler";
 describe("Initial service", () => {
   const fetchSpy = jest.spyOn(global, "fetch");
   fetchSpy.mockImplementation(() => Promise.resolve({} as any));

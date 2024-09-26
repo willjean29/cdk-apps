@@ -3,7 +3,13 @@ import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
 
 export async function getSpaces(event: APIGatewayProxyEvent, dbClient: DynamoDBDocumentClient): Promise<APIGatewayProxyResult> {
   const params = event.queryStringParameters;
-  if (params && params.id) {
+  if (params) {
+    if (!params.id) {
+      return {
+        statusCode: 400,
+        body: JSON.stringify({ message: "Id required!" }),
+      };
+    }
     const spaceId = params.id;
     const itemResponse = await dbClient.send(
       new GetCommand({
